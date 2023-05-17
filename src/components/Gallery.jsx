@@ -13,8 +13,7 @@ const [index, setIndex] = useState(0)
 
 useEffect(() => {
     getCharacterPictures(id)
-    //console.log(characterPictures)
-},[])
+},[id])
 
 const handlePictureClick = (i) => {
     setIndex(i)
@@ -29,7 +28,7 @@ const handlePictureClick = (i) => {
         <div className='border-2 border-red-500 flex flex-wrap'>
         {characterPictures?.map((picture, index) => 
           <div className='w-20 h-20 cursor-pointer' onClick={() => handlePictureClick(index)}>
-            <img src={picture.jpg.image_url} key={index} className='w-full h-full object-cover'/>
+            <img src={picture?.jpg.image_url} key={index} className='w-full h-full object-cover'/>
          </div>
       )}
         </div>

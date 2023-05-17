@@ -9,14 +9,14 @@ const Popular = ({rendered}) => {
  
   const conditionalRender = () => {
     if(!isSearch && rendered === 'popular'){
-      return popularAnime.map(anime => {
+      return popularAnime?.map(anime => {
         //console.log(anime)
         return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
         <img src={anime.images.jpg.large_image_url} alt="" className='w-full h-full object-cover'/>
         </Link>
       })
     }else{
-      return searchResults.map(anime => {
+      return searchResults?.map(anime => {
         //console.log(anime)
         return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
         <img src={anime.images.jpg.large_image_url} alt="" className='w-full h-full object-cover'/>
