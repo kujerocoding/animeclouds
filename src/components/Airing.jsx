@@ -2,21 +2,26 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import { useGlobalContext } from '../context/global'
 
-const Airing = () => {
+const Airing = ({rendered}) => {
 
-  const {airingAnime, isSearch} = useGlobalContext()
+  const {airingAnime, isSearch, searchResults} = useGlobalContext()
   
  
   const conditionalRender = () => {
-    if(!isSearch){
+    if(!isSearch && rendered === 'airing'){
       return airingAnime.map(anime => {
         //console.log(anime)
         return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
         <img src={anime.images.jpg.large_image_url} alt="" className='w-full h-full object-cover'/>
         </Link>
       })
-    }else{
-      alert('No anime found')
+    }else {
+      return searchResults.map(anime => {
+        //console.log(anime)
+        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+        <img src={anime.images.jpg.large_image_url} alt="" className='w-full h-full object-cover'/>
+        </Link>
+      })
     }
   }
 

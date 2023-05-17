@@ -66,7 +66,7 @@ export const GlobalContextProvider = ({children}) => {
 
     const searchAnime = async (anime) => {
         dispatch({type: LOADING})
-        const response = await fetch(`${baseUrl}/search/anime?q=${anime}&order_by=popularity&sort=asc&sfw`)
+        const response = await fetch(`${baseUrl}/anime?q=${anime}&order_by=popularity&sort=asc&sfw`)
         const data = await response.json()
         dispatch({type: SEARCH, payload: data.data})
     }
