@@ -23,7 +23,7 @@ const HomePage = () => {
               return <Popular rendered={rendered}/>
       }
   }
-  const shit = () => {
+  const title = () => {
       switch(rendered){
           case 'popular':
               return 'Popular Anime'
@@ -38,7 +38,7 @@ const HomePage = () => {
     <>
     <Header setRendered={setRendered} rendered={rendered}/>
       <main>
-      <h1 className='text-3xl'>{shit()}</h1>
+      <h1 className='text-3xl text-primary'>{title()}</h1>
       <div>
       {switchComponent()}
       </div>
