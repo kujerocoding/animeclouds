@@ -9,6 +9,7 @@ const SEARCH = "SEARCH";
 const GET_POPULAR_ANIME = "GET_POPULAR_ANIME";
 const GET_UPCOMING_ANIME = "GET_UPCOMING_ANIME";
 const GET_AIRING_ANIME = "GET_AIRING_ANIME"
+const GET_CHARACTER_PICTURES = "GET_CHARACTER_PICTURES"
 
 const reducer = (state, action) => {
     switch(action.type){
@@ -20,6 +21,8 @@ const reducer = (state, action) => {
             return {...state, upcomingAnime:action.payload, loading: false}
         case GET_AIRING_ANIME:
             return {...state, airingAnime:action.payload, loading: false}
+        case GET_CHARACTER_PICTURES:
+            return {...state, characterPictures:action.payload, loading: false}
         case SEARCH:
             return {...state, searchResults:action.payload, loading: false}
         default:
@@ -34,7 +37,7 @@ export const GlobalContextProvider = ({children}) => {
         popularAnime: [],
         upcomingAnime: [],
         airingAnime: [],
-        picture: [],
+        characterPictures: [],
         isSearch: false,
         searchResults: [],
         loading: false,
@@ -62,6 +65,13 @@ export const GlobalContextProvider = ({children}) => {
         const response = await fetch(`${baseUrl}/top/anime?filter=airing`)
         const data = await response.json()
         dispatch({type: GET_AIRING_ANIME, payload: data.data})
+    }
+
+    const getCharacterPictures = async (id) => {
+        dispatch({type: LOADING})
+        const response = await fetch(`${baseUrl}/characters/${id}/pictures`)
+        const data = await response.json()
+        dispatch({type: GET_CHARACTER_PICTURES, payload: data.data})
     }
 
     const searchAnime = async (anime) => {
@@ -95,7 +105,7 @@ export const GlobalContextProvider = ({children}) => {
 
     return(
         <GlobalContext.Provider value={{
-            ...state, handleChange, handleSubmit,searchAnime, search, getPopularAnime, getUpcomingAnime, getAiringAnime
+            ...state, handleChange, handleSubmit,searchAnime, search, getPopularAnime, getUpcomingAnime, getAiringAnime, getCharacterPictures
         }}>
             {children}
         </GlobalContext.Provider>
