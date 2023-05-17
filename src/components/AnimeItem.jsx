@@ -19,6 +19,10 @@ const AnimeItem = () => {
         status,
         synopsis,
         title,
+        title_japanese,
+        duration,
+        score,
+        year,
         trailer} = anime
 
     const getAnime = async (anime) => {
@@ -41,11 +45,65 @@ const AnimeItem = () => {
 
 
   return (
-    <div>
-        <p>{title}</p>
-        <img src={images?.jpg.large_image_url} alt="" />
-        <p>{showMore ? synopsis : synopsis?.substring(0,200) + '...'}
-        <span><button onClick={() => {setShowMore(!showMore)}}>{showMore ? "Show Less" : "Read More"}</button></span></p>
+    <section className='w-10/12 my-10 mx-auto border-2 border-black text-primary'>
+        
+        <div className='flex justify-between items-center bg-primary-btn'>
+        <div>
+        <p className='text-2xl'>{title}</p>
+        <p className='text-xl'>{title_japanese}</p>
+        </div>
+        <div><Link to='/'>Back</Link></div>
+        </div>
+        <div className='lg:flex gap-4 border-2 border-red-500'>
+            <div className='basis-1/5'>
+                <img src={images?.jpg.large_image_url} alt="" className='w-full'/>
+            </div>
+            <div className='basis-4/5 flex flex-col gap-4 border-2 border-green-500'>
+                
+                <div className='bg-pink-500'>
+                    <p className='text-xl'>Score: {score}</p>
+                    <div className='flex gap-10'>
+                        <div>
+                            <p>Favorites: {favorites}</p>
+                            <p>Ranked: #{rank}</p>
+                        </div>
+                        <div>
+                            <p>Rating: {rating}</p>
+                            <p>Popularity: {popularity}</p>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+                <div className='bg-gray-500'>
+                    <p className='font-bold'>Synopsis</p>
+                    <p className='text-sm'>{showMore ? synopsis : synopsis?.substring(0,200) + '...'}
+                        <span>
+                            <button onClick={() => {setShowMore(!showMore)}} className='text-accent'
+                            >{showMore ? "Show Less" : "Read More"}
+                            </button>
+                        </span>
+                    </p>
+                </div>
+
+                <div className='bg-orange-500'>
+                    
+                    <p className='text-xl'>Status: {status}</p>
+                    <div className='flex gap-10'>
+                        <div> 
+                            <p>Aired: {aired?.string}</p>
+                            <p>Episodes: {episodes}</p>
+                        </div>
+                        <div>
+                            <p>Duration: {duration}</p>
+                            <p>Year: {year}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <p>trailer</p>
         <div>
             {trailer?.embed_url && 
@@ -73,7 +131,7 @@ const AnimeItem = () => {
             </Link>
             })}
         </div>
-    </div>
+    </section>
   )
 }
 

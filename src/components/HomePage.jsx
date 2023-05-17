@@ -37,8 +37,8 @@ const HomePage = () => {
   return (
     <>
     <Header setRendered={setRendered} rendered={rendered}/>
-      <main className='w-11/12 mx-auto '>
-      <h1 className='text-3xl text-primary'>{title()}</h1>
+      <main className='w-11/12 mx-auto py-10 '>
+      <h1 className='text-2xl text-primary bg-secondary-btn mb-10 p-4 uppercase font-bold'>{title()}</h1>
       <div>
       {switchComponent()}
       </div>
