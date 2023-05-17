@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const AnimeItem = () => {
 
@@ -30,7 +30,7 @@ const AnimeItem = () => {
     const getCharacters = async (anime) => {
         const response = await fetch(`https://api.jikan.moe/v4/anime/${anime}/characters`)
         const data = await response.json()
-        console.log('characters',data.data[0])
+        console.log('characters',data.data)
         setCharacters(data.data)
     }
 
@@ -58,6 +58,20 @@ const AnimeItem = () => {
 
             </iframe>
             }
+        </div>
+        <p>characters</p>
+        <div className='grid grid-cols-characters gap-4'>
+            {characters?.map((character, index) => {
+            const {role} = character
+            const {images, name, mal_id} = character.character
+            return <Link to={`/character/${mal_id}`} key={index}>
+                <div>
+                    <img src={images?.jpg.image_url} alt="" className='w-full h-full object-cover'/>
+                    <p>{name}</p>
+                    <p>{role}</p>
+                </div>
+            </Link>
+            })}
         </div>
     </div>
   )

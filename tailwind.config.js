@@ -8,6 +8,7 @@ export default {
     extend: {
       gridTemplateColumns: {
         'auto': 'repeat(auto-fill, minmax(300px, 1fr))',
+        'characters': 'repeat(auto-fill, minmax(150px, 1fr))',
       }
     },
   },
