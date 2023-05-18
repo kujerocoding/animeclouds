@@ -4,7 +4,7 @@ import {BsSearch} from 'react-icons/bs'
 
 const Header = ({setRendered}) => {
 
-    const {handleChange, handleSubmit, search, getUpcomingAnime, getAiringAnime} = useGlobalContext()
+    const {handleChange, handleSubmit, search, getUpcomingAnime, getAiringAnime, getPopularAnime} = useGlobalContext()
     
   return (
     <header className='text-center bg-secondary drop-shadow-md text-lg'>
@@ -17,7 +17,10 @@ const Header = ({setRendered}) => {
                 <button className="ml-4" type='submit' onClick={handleSubmit}><BsSearch className='fill-accent w-5 h-5'/></button>
         </form>
         <div className='hidden md:flex gap-6 items-center text-primary'>
-            <button onClick={() => {setRendered('popular')}}
+            <button onClick={() => {
+                setRendered('popular')
+                getPopularAnime()
+            }}
             className='hover:scale-105'
             >Popular</button>
             <button onClick={() => {
@@ -28,7 +31,6 @@ const Header = ({setRendered}) => {
             >Airing</button>
             <button onClick={() => {
                 setRendered('upcoming')
-                getUpcomingAnime()
             }}
             className='hover:scale-105'
             >Upcoming</button>

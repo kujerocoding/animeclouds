@@ -100,7 +100,7 @@ export const GlobalContextProvider = ({children}) => {
     }
 
     useEffect(() => {
-        getPopularAnime()
+        getUpcomingAnime()
     },[])
 
     return(

@@ -9,7 +9,7 @@ import Header from './Header'
 
 const HomePage = () => {
 
-    const [rendered, setRendered] = useState('popular')
+    const [rendered, setRendered] = useState('upcoming')
 
     const switchComponent =() => {
       switch(rendered){
