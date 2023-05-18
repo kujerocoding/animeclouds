@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import {BiArrowBack} from 'react-icons/bi'
 
 const AnimeItem = () => {
 
@@ -45,30 +46,27 @@ const AnimeItem = () => {
 
 
   return (
-    <section className='w-10/12 my-10 mx-auto border-2 border-black text-primary'>
+    <section className='w-10/12 my-10 mx-auto text-primary'>
         
-        <div className='flex justify-between items-center bg-primary-btn'>
+        <div className='flex justify-between p-4 items-center bg-primary-btn'>
         <div>
-        <p className='text-2xl'>{title}</p>
-        <p className='text-xl'>{title_japanese}</p>
+            <p className='text-2xl'>{title}</p>
+            <p className='text-xl'>{title_japanese}</p>
         </div>
-        <div><Link to='/'>Back</Link></div>
+        <div className='hover:scale-105 w-8'><Link to='/'><BiArrowBack className='w-full h-full'/></Link></div>
         </div>
-        <div className='lg:flex gap-4 border-2 border-red-500'>
-            <div className='basis-1/5'>
-                <img src={images?.jpg.large_image_url} alt="" className='w-full'/>
+        <div className='flex flex-col items-center lg:flex-row gap-4 mb-6 p-4 bg-secondary-300'>
+            <div className='w-11/12 md:w-8/12 lg:w-1/3 rounded-xl'>
+                <img src={images?.jpg.large_image_url} alt="" className='w-full rounded-xl'/>
             </div>
-            <div className='basis-4/5 flex flex-col gap-4 border-2 border-green-500'>
+            <div className='w-11/12 md:w-8/12 lg:w-2/3 flex flex-col gap-4'>
                 
-                <div className='bg-pink-500'>
-                    <p className='text-xl'>Score: {score}</p>
+                <div className=''>
+                    <p className='text-2xl font-bold'>Score: {score === null ? 'Not available': score}</p>
                     <div className='flex gap-10'>
-                        <div>
-                            <p>Favorites: {favorites}</p>
+                        <div className='w-full flex flex-wrap justify-evenly bg-secondary-btn font-bold p-2'>
                             <p>Ranked: #{rank}</p>
-                        </div>
-                        <div>
-                            <p>Rating: {rating}</p>
+                            <p>Favorites: {favorites}</p>
                             <p>Popularity: {popularity}</p>
                         </div>
                     </div>
@@ -76,9 +74,9 @@ const AnimeItem = () => {
 
                
 
-                <div className='bg-gray-500'>
-                    <p className='font-bold'>Synopsis</p>
-                    <p className='text-sm'>{showMore ? synopsis : synopsis?.substring(0,200) + '...'}
+                <div className=' '>
+                    <p className='font-bold text-xl'>Synopsis</p>
+                    <p className=''>{showMore ? synopsis : synopsis?.substring(0,300) + '...'}
                         <span>
                             <button onClick={() => {setShowMore(!showMore)}} className='text-accent'
                             >{showMore ? "Show Less" : "Read More"}
@@ -87,49 +85,52 @@ const AnimeItem = () => {
                     </p>
                 </div>
 
-                <div className='bg-orange-500'>
+                <div className='text-lg font-bold'>
                     
-                    <p className='text-xl'>Status: {status}</p>
+                    <p>Status: &nbsp;<span className='font-normal'>{status}</span></p>
                     <div className='flex gap-10'>
                         <div> 
-                            <p>Aired: {aired?.string}</p>
-                            <p>Episodes: {episodes}</p>
-                        </div>
-                        <div>
-                            <p>Duration: {duration}</p>
-                            <p>Year: {year}</p>
+                            <p>Aired: &nbsp;<span className='font-normal'>{aired?.string}</span></p>
+                            <p>Episodes: &nbsp;<span className='font-normal'>{episodes}</span></p>
+                            <p>Rating: &nbsp;<span className='font-normal'>{rating}</span></p>
+                            <p>Duration: &nbsp;<span className='font-normal'>{duration}</span></p>
+                            <p>Year: &nbsp;<span className='font-normal'>{year}</span></p>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-        <p>trailer</p>
-        <div>
-            {trailer?.embed_url && 
-            <iframe 
-            src={trailer?.embed_url}
-            width="800"
-            height="450"
-
-            >
-
-            </iframe>
-            }
-        </div>
-        <p>characters</p>
-        <div className='grid grid-cols-characters gap-4'>
-            {characters?.map((character, index) => {
-            const {role} = character
-            const {images, name, mal_id} = character.character
-            return <Link to={`/character/${mal_id}`} key={index}>
-                <div>
-                    <img src={images?.jpg.image_url} alt="" className='w-full h-full object-cover'/>
-                    <p>{name}</p>
-                    <p>{role}</p>
+        <div className='flex flex-col h-[400px] items-center mb-6'>
+            <div className='w-full md:w-8/12 h-full text-center'>
+                <h2 className='text-lg uppercase mb-4'>trailer</h2>
+                <div className='w-full h-5/6'>
+                    {trailer?.embed_url && 
+                    <iframe
+                    title={`Trailer of ${title}`} 
+                    src={trailer?.embed_url}
+                    className='w-full h-full'
+                    >
+                    </iframe>
+                    }
                 </div>
-            </Link>
-            })}
+            </div>
+        </div>
+        <div className=' text-center mb-6'>
+        <h2 className='text-lg uppercase mb-4'>characters</h2>
+            <div className='grid grid-cols-characters gap-4'>
+                {characters?.map((character, index) => {
+                const {role} = character
+                const {images, name, mal_id} = character.character
+                return <Link to={`/character/${mal_id}`} key={index}>
+                    <div className='p-2 bg-secondary-300 rounded-xl'>
+                        <img src={images?.jpg.image_url} alt="" className='w-full h-full object-cover rounded-xl'/>
+                    </div>
+                    <p className='text-sm'>{name}</p>
+                     <p className='text-xs'>{role}</p>
+                </Link>
+                })}
+            </div>
         </div>
     </section>
   )
