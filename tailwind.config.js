@@ -15,7 +15,7 @@ export default {
         'accent': '#1d6df7',
       },
       gridTemplateColumns: {
-        'auto': 'repeat(auto-fill, minmax(250px, 1fr))',
+        'auto': 'repeat(auto-fill, minmax(200px, 1fr))',
         'characters': 'repeat(auto-fill, minmax(120px, 1fr))',
       }
     },
