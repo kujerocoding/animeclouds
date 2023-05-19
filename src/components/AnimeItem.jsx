@@ -54,10 +54,10 @@ const AnimeItem = () => {
         </div>
         <div className='relative flex flex-col items-center lg:flex-row gap-4 mb-6 p-4'>
             <div className='absolute top-0 left-0 w-full h-full -z-10 blur-sm overflow-hidden'>
-                <img src={images?.jpg.large_image_url} alt="" className='w-full h-full object-cover object-top'/>
+                <img src={images?.jpg.large_image_url} alt="bg picture" className='w-full h-full object-cover object-top'/>
             </div>
             <div className='w-11/12 md:w-8/12 lg:w-1/3 rounded-xl'>
-                <img src={images?.jpg.large_image_url} alt="" className='w-full rounded-xl'/>
+                <img src={images?.jpg.large_image_url} alt={title} className='w-full rounded-xl'/>
             </div>
             <div className='w-11/12 md:w-8/12 lg:w-2/3 flex flex-col gap-4 bg-secondary-300-5 text-primary p-4'>
                 
@@ -119,7 +119,7 @@ const AnimeItem = () => {
                 const {images, name, mal_id} = character.character
                 return <Link to={`/character/${mal_id}`} key={index}>
                     <div className='p-2 bg-secondary-300 rounded-xl'>
-                        <img src={images?.jpg.image_url} alt="" className='w-full h-full object-cover rounded-xl'/>
+                        <img src={images?.jpg.image_url} alt="character" className='w-full h-full object-cover rounded-xl'/>
                     </div>
                     <p className='text-sm'>{name}</p>
                      <p className='text-xs'>{role}</p>

@@ -32,7 +32,7 @@ const Gallery = () => {
         <div className='flex flex-col items-center justify-center bg-secondary rounded-md'>
         <div className=' flex flex-col md:flex-row items-center md:items-center justify-center gap-4 md:gap-20 md:p-10'>
             <div className='w-72 h-96 rounded-lg mb-4 p-2 bg-primary'>
-                <img src={characterPictures[index]?.jpg.image_url} alt="" className='w-full h-full object-cover rounded-lg' />
+                <img src={characterPictures[index]?.jpg.image_url} alt="Character picture" className='w-full h-full object-cover rounded-lg' />
             </div>
 
             <div>
@@ -41,7 +41,7 @@ const Gallery = () => {
                 
                 <div className='w-20 h-20 grayscale'>
                   
-                  <img src={item.person.images.jpg.image_url} alt="" className='w-full h-full object-cover rounded-md'/>
+                  <img src={item.person.images.jpg.image_url} alt={item.person.name} className='w-full h-full object-cover rounded-md'/>
                 </div>
                 <div> 
                   <h2 className='text-sm'>Voice Actor</h2>
