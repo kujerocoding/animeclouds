@@ -10,6 +10,7 @@ const GET_POPULAR_ANIME = "GET_POPULAR_ANIME";
 const GET_UPCOMING_ANIME = "GET_UPCOMING_ANIME";
 const GET_AIRING_ANIME = "GET_AIRING_ANIME"
 const GET_CHARACTER_PICTURES = "GET_CHARACTER_PICTURES"
+const GET_CHARACTER_VOICEACTOR = "GET_CHARACTER_VOICEACTOR"
 
 const reducer = (state, action) => {
     switch(action.type){
@@ -23,6 +24,8 @@ const reducer = (state, action) => {
             return {...state, airingAnime:action.payload, loading: false}
         case GET_CHARACTER_PICTURES:
             return {...state, characterPictures:action.payload, loading: false}
+        case GET_CHARACTER_VOICEACTOR:
+            return {...state, characterVoiceActor:action.payload, loading: false}
         case SEARCH:
             return {...state, searchResults:action.payload, loading: false}
         default:
@@ -38,6 +41,7 @@ export const GlobalContextProvider = ({children}) => {
         upcomingAnime: [],
         airingAnime: [],
         characterPictures: [],
+        characterVoiceActor: [],
         isSearch: false,
         searchResults: [],
         loading: false,
@@ -74,6 +78,13 @@ export const GlobalContextProvider = ({children}) => {
         dispatch({type: GET_CHARACTER_PICTURES, payload: data.data})
     }
 
+    const getCharacterVoiceActor = async (id) => {
+        dispatch({type: LOADING})
+        const response = await fetch(`${baseUrl}/characters/${id}/voices`)
+        const data = await response.json()
+        dispatch({type: GET_CHARACTER_VOICEACTOR, payload: data.data})
+    }
+
     const searchAnime = async (anime) => {
         dispatch({type: LOADING})
         const response = await fetch(`${baseUrl}/anime?q=${anime}&order_by=popularity&sort=asc&sfw`)
@@ -100,12 +111,12 @@ export const GlobalContextProvider = ({children}) => {
     }
 
     useEffect(() => {
-        getUpcomingAnime()
+        getAiringAnime()
     },[])
 
     return(
         <GlobalContext.Provider value={{
-            ...state, handleChange, handleSubmit,searchAnime, search, getPopularAnime, getUpcomingAnime, getAiringAnime, getCharacterPictures
+            ...state, handleChange, handleSubmit,searchAnime, search, getPopularAnime, getUpcomingAnime, getAiringAnime, getCharacterPictures,  getCharacterVoiceActor
         }}>
             {children}
         </GlobalContext.Provider>
