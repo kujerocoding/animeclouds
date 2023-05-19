@@ -9,6 +9,7 @@ const SEARCH = "SEARCH";
 const GET_POPULAR_ANIME = "GET_POPULAR_ANIME";
 const GET_UPCOMING_ANIME = "GET_UPCOMING_ANIME";
 const GET_AIRING_ANIME = "GET_AIRING_ANIME"
+const GET_RANDOM_QUOTE = "GET_RANDOM_QUOTE"
 const GET_CHARACTER_PICTURES = "GET_CHARACTER_PICTURES"
 const GET_CHARACTER_VOICEACTOR = "GET_CHARACTER_VOICEACTOR"
 
@@ -22,6 +23,8 @@ const reducer = (state, action) => {
             return {...state, upcomingAnime:action.payload, loading: false}
         case GET_AIRING_ANIME:
             return {...state, airingAnime:action.payload, loading: false}
+        case GET_RANDOM_QUOTE:
+            return {...state, randomQuote:action.payload, loading: false}
         case GET_CHARACTER_PICTURES:
             return {...state, characterPictures:action.payload, loading: false}
         case GET_CHARACTER_VOICEACTOR:
@@ -40,6 +43,7 @@ export const GlobalContextProvider = ({children}) => {
         popularAnime: [],
         upcomingAnime: [],
         airingAnime: [],
+        randomQuote: [],
         characterPictures: [],
         characterVoiceActor: [],
         isSearch: false,
@@ -52,23 +56,30 @@ export const GlobalContextProvider = ({children}) => {
 
     const getPopularAnime = async () => {
         dispatch({type: LOADING})
-        const response = await fetch(`${baseUrl}/top/anime?filter=bypopularity`)
+        const response = await fetch(`${baseUrl}/top/anime?filter=bypopularity&limit=15`)
         const data = await response.json()
         dispatch({type: GET_POPULAR_ANIME, payload: data.data})
     }
 
     const getUpcomingAnime = async () => {
         dispatch({type: LOADING})
-        const response = await fetch(`${baseUrl}/top/anime?filter=upcoming`)
+        const response = await fetch(`${baseUrl}/top/anime?filter=upcoming&limit=15`)
         const data = await response.json()
         dispatch({type: GET_UPCOMING_ANIME, payload: data.data})
     }
 
     const getAiringAnime = async () => {
         dispatch({type: LOADING})
-        const response = await fetch(`${baseUrl}/top/anime?filter=airing`)
+        const response = await fetch(`${baseUrl}/top/anime?filter=airing&limit=15`)
         const data = await response.json()
         dispatch({type: GET_AIRING_ANIME, payload: data.data})
+    }
+
+    const getRandomQuote = async () => {
+        dispatch({type: LOADING})
+        const response = await fetch("https://animechan.vercel.app/api/random")
+        const data = await response.json()
+        dispatch({type: GET_RANDOM_QUOTE, payload: data})
     }
 
     const getCharacterPictures = async (id) => {
@@ -112,6 +123,7 @@ export const GlobalContextProvider = ({children}) => {
 
     useEffect(() => {
         getAiringAnime()
+        getRandomQuote()
     },[])
 
     return(

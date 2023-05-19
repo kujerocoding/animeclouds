@@ -8,7 +8,8 @@ import Header from './Header'
 
 
 const HomePage = () => {
-
+    const {randomQuote} = useGlobalContext()
+    console.log(randomQuote)
     const [rendered, setRendered] = useState('airing')
 
     const switchComponent =() => {
@@ -37,11 +38,19 @@ const HomePage = () => {
   return (
     <>
     <Header setRendered={setRendered} rendered={rendered}/>
-      <main className='w-11/12 mx-auto py-10 '>
-      <h1 className='text-2xl text-primary bg-secondary-btn mb-10 p-4 uppercase font-bold'>{title()}</h1>
-      <div>
-      {switchComponent()}
-      </div>
+      <main className='lg:w-11/12 mx-auto py-10'>
+      <h1 className='text-2xl text-primary bg-secondary-btn mb-10 p-4 uppercase font-bold'>Top 15 {title()}</h1>
+      <div className='flex'>
+            <div className='w-full lg:w-5/6'>
+            {switchComponent()}
+            </div>
+            <div className='hidden text-gray-500 items-center lg:flex flex-col gap-2 w-1/6 h-screen pl-6 text-sm'>
+                <p>Quote of the day:</p>
+                <p className='italic'>"{randomQuote?.quote}"</p>
+                <p>-{randomQuote?.character}</p>
+                <p className=''>( {randomQuote?.anime} )</p>
+            </div>
+       </div>
       </main>
     </>
   )

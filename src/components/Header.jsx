@@ -31,6 +31,7 @@ const Header = ({setRendered}) => {
             >Airing</button>
             <button onClick={() => {
                 setRendered('upcoming')
+                getUpcomingAnime()
             }}
             className='hover:scale-105'
             >Upcoming</button>
