@@ -19,8 +19,9 @@ const Upcoming = ({rendered}) => {
     }else{
       return searchResults?.map(anime => {
         //console.log(anime)
-        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id} className='relative text-center'>
         <img src={anime.images.jpg.large_image_url} alt="" className='w-full h-full object-cover'/>
+        <div className='absolute bottom-0 left-0 w-full'><p className='text-primary bg-secondary-btn'>"{anime.title}"</p></div>
         </Link>
       })
     }

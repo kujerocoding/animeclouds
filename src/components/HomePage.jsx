@@ -39,9 +39,11 @@ const HomePage = () => {
     <>
     <Header setRendered={setRendered} rendered={rendered}/>
       <main className='lg:w-11/12 mx-auto py-10'>
-      <h1 className='text-2xl text-primary bg-secondary-btn mb-10 p-4 uppercase font-bold'>Top 15 {title()}</h1>
+      <div className='inline-block rounded-ee-full rounded-se-full bg-primary-btn py-4 px-8 mb-10'>
+      <h2 className='text-2xl text-primary uppercase font-bold'>Top 15 {title()}</h2>
+      </div>
       <div className='flex'>
-            <div className='w-full lg:w-5/6'>
+            <div className='px-4 w-full lg:w-5/6'>
             {switchComponent()}
             </div>
             <div className='hidden text-gray-500 items-center lg:flex flex-col gap-2 w-1/6 h-screen pl-6 text-sm'>
@@ -52,6 +54,9 @@ const HomePage = () => {
             </div>
        </div>
       </main>
+      <footer className='text-primary text-center my-6 text-sm'>
+        <p>&copy; 2023 AnimeClouds. All rights reserved.</p>
+    </footer>
     </>
   )
 }

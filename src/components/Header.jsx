@@ -1,6 +1,7 @@
 import React from 'react'
 import { useGlobalContext } from '../context/global'
 import {BsSearch} from 'react-icons/bs'
+import { Link } from 'react-router-dom'
 
 const Header = ({setRendered}) => {
 
@@ -9,34 +10,34 @@ const Header = ({setRendered}) => {
   return (
     <header className='text-center'>
     <nav className='w-11/12 mx-auto py-4 flex items-center justify-between'>
-        <div className='w-40'>
+        <button onClick={() => window.location.reload(true)} className='w-40'>
             <img src="../src/assets/images/logo.png" alt="logo" />
-        </div>
+        </button>
         <form action="" className="flex bg-primary-btn pr-4 shadow ">
-                <input className="appearance-none border w-full py-1 px-2 text-primary leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder='Search Anime' onChange={handleChange} value={search}/>
+                <input className="appearance-none border w-full py-1 px-2 text-secondary-300 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder='Search Anime' onChange={handleChange} value={search}/>
                 <button className="ml-4" type='submit' onClick={handleSubmit}><BsSearch className='fill-primary w-5 h-5'/></button>
         </form>
-        <div className='hidden md:flex gap-6 items-center text-primary'>
+    </nav>
+    <div className='flex gap-6 justify-center text-primary'>
             <button onClick={() => {
                 setRendered('popular')
                 getPopularAnime()
             }}
-            className='hover:scale-105'
+            className='hover:scale-105 hover:text-primary-btn'
             >Popular</button>
             <button onClick={() => {
                 setRendered('airing')
                 getAiringAnime()
             }}
-            className='hover:scale-105'
+            className='hover:scale-105 hover:text-primary-btn'
             >Airing</button>
             <button onClick={() => {
                 setRendered('upcoming')
                 getUpcomingAnime()
             }}
-            className='hover:scale-105'
+            className='hover:scale-105 hover:text-primary-btn'
             >Upcoming</button>
         </div>
-    </nav>
   </header>
   )
 }
