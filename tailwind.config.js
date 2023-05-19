@@ -10,6 +10,7 @@ export default {
         'primary': '#f9f2e2',
         'secondary': '#000',
         'secondary-300': '#333',
+        'secondary-300-5': 'rgba(51, 51, 51, 0.5)',
         'primary-btn': '#1d6df7',
         'secondary-btn': '#0d0a03',
         'accent': '#1d6df7',

@@ -117,7 +117,7 @@ export const GlobalContextProvider = ({children}) => {
             state.isSearch = true
         }else{
             state.isSearch = false;
-            alert('fuck')
+            
         }
     }
 
