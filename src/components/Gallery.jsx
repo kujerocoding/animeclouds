@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useGlobalContext } from '../context/global'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import {useParams, useNavigate } from 'react-router-dom'
 import {BiArrowBack} from 'react-icons/bi'
 
 
@@ -9,26 +9,25 @@ const Gallery = () => {
 
   const navigate = useNavigate()
 
-const {id} = useParams()
-const {getCharacterPictures, characterPictures, getCharacterVoiceActor, characterVoiceActor} = useGlobalContext()
-console.log('character voice actor', characterVoiceActor)
+  const {id} = useParams()
+  const {getCharacterPictures, characterPictures, getCharacterVoiceActor, characterVoiceActor} = useGlobalContext()
 
-const [index, setIndex] = useState(0)
+  const [index, setIndex] = useState(0)
 
-useEffect(() => {
-    getCharacterPictures(id)
-    getCharacterVoiceActor(id)
-},[id])
+  useEffect(() => {
+      getCharacterPictures(id)
+      getCharacterVoiceActor(id)
+  },[id])
 
-const handlePictureClick = (i) => {
-    setIndex(i)
-}
+  const handlePictureClick = (i) => {
+      setIndex(i)
+  }
 
   return (
     <div className='bg-secondary-btn'>
         <div className='w-11/12 mx-auto text-right pt-6'>
-        <button onClick={() => navigate(-1)} className='text-primary'><BiArrowBack className='w-8 h-8' />
-        </button>
+          <button onClick={() => navigate(-1)} className='text-primary'><BiArrowBack className='w-6 h-6' />
+          </button>
         </div>
         <div className='flex flex-col items-center justify-center bg-secondary rounded-md'>
         <div className=' flex flex-col md:flex-row items-center md:items-center justify-center gap-4 md:gap-20 md:p-10'>
@@ -62,7 +61,6 @@ const handlePictureClick = (i) => {
           )}
           </div>
         </div>
-        
     </div>
   )
 }

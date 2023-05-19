@@ -29,13 +29,11 @@ const AnimeItem = () => {
     const getAnime = async (anime) => {
         const response = await fetch(`https://api.jikan.moe/v4/anime/${anime}`)
         const data = await response.json()
-        //console.log('anime',data.data)
         setAnime(data.data)
     }
     const getCharacters = async (anime) => {
         const response = await fetch(`https://api.jikan.moe/v4/anime/${anime}/characters`)
         const data = await response.json()
-        console.log('characters',data.data)
         setCharacters(data.data)
     }
 
@@ -47,13 +45,12 @@ const AnimeItem = () => {
 
   return (
     <section className='w-10/12 my-10 mx-auto text-primary'>
-        
         <div className='flex justify-between p-4 items-center bg-gradient-to-l from-secondary to-primary-btn'>
-        <div>
-            <p className='text-2xl'>{title}</p>
-            <p className='text-xl'>{title_japanese}</p>
-        </div>
-        <div className='hover:scale-105 w-6'><Link to='/'><BiArrowBack className='w-full h-full'/></Link></div>
+            <div>
+                <p className='text-2xl'>{title}</p>
+                <p className='text-xl'>{title_japanese}</p>
+            </div>
+            <div className='hover:scale-105 w-6'><Link to='/'><BiArrowBack className='w-full h-full'/></Link></div>
         </div>
         <div className='relative flex flex-col items-center lg:flex-row gap-4 mb-6 p-4'>
             <div className='absolute top-0 left-0 w-full h-full -z-10 blur-sm overflow-hidden'>
@@ -74,11 +71,8 @@ const AnimeItem = () => {
                         </div>
                     </div>
                 </div>
-
-               
-
                 <div className=''>
-                    <p className='font-bold '>Synopsis</p>
+                    <p className='font-bold'>Synopsis</p>
                     <p className='text-sm'>{showMore ? synopsis : synopsis?.substring(0,300) + '...'}
                         <span>
                             <button onClick={() => {setShowMore(!showMore)}} className='text-accent'
@@ -87,9 +81,7 @@ const AnimeItem = () => {
                         </span>
                     </p>
                 </div>
-
                 <div className='font-bold'>
-                    
                     <p>Status: &nbsp;<span className='font-normal'>{status}</span></p>
                     <div className='flex gap-10'>
                         <div> 
@@ -101,7 +93,6 @@ const AnimeItem = () => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div className='flex flex-col h-[400px] items-center mb-6'>
